@@ -24,16 +24,19 @@ do {
 
     let numbers = input.components(separatedBy: "\n").map{Int($0)!}
     let target = findAnswer(numbers: numbers, preAmble: preAmble)
-    
+    var answer: Int = 0
     nextloop: for i in 0..<numbers.count-1 {
         for j in i+1..<numbers.count {
             let window = numbers[i...j]
             let attempt = window.reduce(0,+)
             if  attempt == target {
-                print("Answer: ", window.max()! + window.min()!)
+                answer = window.max()! + window.min()!
+                print("Answer: ", answer)
+                break
             }
             if attempt > target { continue nextloop}
         }
+        if answer == target { break }
     }
     
 } catch {
